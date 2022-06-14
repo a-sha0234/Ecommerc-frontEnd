@@ -15,8 +15,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   function getItemsbyType(type) {
-    let arr = itemData.items.filter((item) => {
-      if (item.ProductType == "shirt") {
+    let arr = itemData.filter((item) => {
+      if (item.ProductType == type) {
         return { item };
       }
     });
@@ -45,9 +45,16 @@ function App() {
         <Route path="/" element={<Home items={itemData} />}></Route>
         <Route
           path="/trainers"
-          element={<Traineritems items={itemData} />}
+          element={
+            <Traineritems items={itemData} getItemsbyType={getItemsbyType} />
+          }
         ></Route>
-        <Route path="/shirts" element={<ShirtItems items={itemData} />}></Route>
+        <Route
+          path="/shirts"
+          element={
+            <ShirtItems items={itemData} getItemsbyType={getItemsbyType} />
+          }
+        ></Route>
 
         {isLoading == false &&
           itemData.map((data) => {

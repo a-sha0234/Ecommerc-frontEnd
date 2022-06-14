@@ -1,3 +1,4 @@
 export default function Card(props) {
-  return <div>{/* <p>{props.data.itemName}</p> */}</div>;
+  console.log(props);
+  return <div>{props.data.itemName}</div>;
 }
