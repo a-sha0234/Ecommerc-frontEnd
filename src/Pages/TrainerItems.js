@@ -6,7 +6,7 @@ export default function Traineritems(props) {
   return (
     <div>
       {props.getItemsbyType("trainers").map((item) => {
-        return <Card data={item} />;
+        return <Card data={item} setBasket={props.setBasket} />;
       })}
     </div>
   );
