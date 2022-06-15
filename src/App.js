@@ -1,4 +1,4 @@
-import { react, useState, useEffect } from "react";
+import { react, useState, useEffect, createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { fetchData } from "./ApiCalls/getItems";
 //component imports
@@ -11,10 +11,12 @@ import Traineritems from "./Pages/TrainerItems";
 import ShirtItems from "./Pages/ShirtItems";
 
 function App() {
-  const [itemData, setItemData] = useState([]);
+  const [itemData, setItemData] = useState([]); // holds data
   const [isLoading, setIsLoading] = useState(true);
+  const [basket, setBasket] = useState([]);
 
   function getItemsbyType(type) {
+    // to get specifc items, either shirt or trainers from api data
     let arr = itemData.filter((item) => {
       if (item.ProductType == type) {
         return { item };
@@ -25,10 +27,11 @@ function App() {
   }
 
   useEffect(() => {
-    fetchData(setItemData);
+    fetchData(setItemData); // call api function
   }, []);
 
   useEffect(() => {
+    // check if data is loaded
     if (itemData.length > 0) {
       setIsLoading(false);
     } else {
@@ -42,17 +45,33 @@ function App() {
       <Header />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home items={itemData} />}></Route>
+        <Route
+          path="/"
+          element={<Home items={itemData} setBasket={setBasket} />}
+        ></Route>
+        {/* <Route
+          path="/basket"
+          element={<Basket basket={basket} items={itemData} />}
+        ></Route> */}
+
         <Route
           path="/trainers"
           element={
-            <Traineritems items={itemData} getItemsbyType={getItemsbyType} />
+            <Traineritems
+              items={itemData}
+              getItemsbyType={getItemsbyType}
+              setBasket={setBasket}
+            />
           }
         ></Route>
         <Route
           path="/shirts"
           element={
-            <ShirtItems items={itemData} getItemsbyType={getItemsbyType} />
+            <ShirtItems
+              items={itemData}
+              getItemsbyType={getItemsbyType}
+              setBasket={setBasket}
+            />
           }
         ></Route>
 
