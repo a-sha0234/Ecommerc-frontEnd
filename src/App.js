@@ -1,6 +1,7 @@
 import { react, useState, useEffect, createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { fetchData } from "./ApiCalls/getItems";
+import "./scss/main.scss";
 //component imports
 
 import Navbar from "./components/Navbar";
