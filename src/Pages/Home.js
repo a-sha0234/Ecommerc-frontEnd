@@ -5,7 +5,7 @@ export default function Home(props) {
   return (
     <div>
       {props.items.map((data) => {
-        return <Card data={data} />;
+        return <Card data={data} setBasket={props.setBasket} />;
       })}
     </div>
   );
